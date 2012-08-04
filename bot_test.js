@@ -6,13 +6,13 @@ function dateToString()
 {
   var dt = new Date();
   var dtText = new String();
-  dtText = dt.getHours() + ':' + dt.getMinutes() + ' です';
+  dtText = dt.getHours() + ':' + dt.getMinutes();
   return dtText;
 }
 
 function showTime()
 {
-  send(where, dateToString());
+  send(where, messageByCase(dateToString()) + ' です');
   setNextTimer();
 }
 
@@ -28,3 +28,15 @@ function event::onLoad()
   setNextTimer();
 }
 
+messageByCase(date)
+{
+  var message = new String();
+  switch(date){
+    case '09:00':
+      message = date + '業務開始'
+      break;
+    case '19:50':
+      message = date + 'よるダヨー'
+      break;
+  }
+}
