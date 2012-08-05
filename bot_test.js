@@ -10,9 +10,32 @@ function dateToString()
   return dtText;
 }
 
+function messageByCase()
+{
+  var message = new String();
+  switch(dateToString()){
+    case '09:00':
+      message = '業務開始';
+      break;
+
+    case '13:00':
+      message = 'お昼ごはんの時間です';
+      break;
+
+    case '12:30':
+      message = 'あと30分';
+      break;
+
+    default:
+      message = '';
+      break;
+  }
+  return message;
+}
+
 function showTime()
 {
-  send(where, messageByCase(dateToString()) + ' です');
+  send(where, '-----' + dateToString() + ' です-----' + messageByCase());
   setNextTimer();
 }
 
@@ -26,17 +49,4 @@ function setNextTimer()
 function event::onLoad()
 {
   setNextTimer();
-}
-
-messageByCase(date)
-{
-  var message = new String();
-  switch(date){
-    case '09:00':
-      message = date + '業務開始'
-      break;
-    case '19:50':
-      message = date + 'よるダヨー'
-      break;
-  }
 }
