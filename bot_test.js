@@ -1,4 +1,4 @@
-var interval = 30 * 60 * 1000; // 30分
+var globalInterval = 30 * 60 * 1000; // 30分
 var where = '#bot_test';
 
 
@@ -76,11 +76,17 @@ function messageByCase()
 
 function showTime()
 {
-  send(where, '-----' + dateToString() + ' です-----' + messageByCase());
-  setNextTimer();
+  var minutes = new Date();
+
+  if(minutes.getMinutes() == 30||minutes.getMinutes() == 0){
+    send(where, '-----' + dateToString() + ' です-----' + messageByCase());
+    setNextTimer(globalInterval);
+  }else {
+    setNextTimer(30000);
+  }
 }
 
-function setNextTimer()
+function setNextTimer(interval)
 {
   var now = new Date().getTime();
   var next = (Math.floor(now / interval) +1) * interval;
@@ -89,5 +95,5 @@ function setNextTimer()
 
 function event::onLoad()
 {
-  setNextTimer();
+  setNextTimer(globalInterval);
 }
